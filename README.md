@@ -15,3 +15,4 @@ A small app to bookmark some words I'm trying to remember.
   - Add a different way to visualise the board.
 - Add a search bar that searches the defeintions and the words.
 - Switch to IndexDB.
+- Add auto-save feature.
