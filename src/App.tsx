@@ -1,16 +1,12 @@
-import { Counter } from './features/counter/Counter'
+import { DefentionSearch } from './features'
 
 function App() {
   return (
     <>
       <div className="navbar bg-base-100">
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <button className="btn btn-ghost normal-case text-xl">daisyUI</button>
       </div>
-      <input
-        type="text"
-        placeholder="Type here"
-        className="input input-bordered input-lg w-full max-w-xs"
-      />
+      <DefentionSearch />
     </>
   )
 }
