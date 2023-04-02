@@ -3,10 +3,12 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { defentionSearchApi } from '../services/defentionSearchService'
 import searchReducer from '../features/defentionSearch/defentionSearchSlice'
+import wordsReducer from '../features/wordCards/wordCardsSlice'
 
 export const store = configureStore({
   reducer: {
     search: searchReducer,
+    words: wordsReducer,
     [defentionSearchApi.reducerPath]: defentionSearchApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

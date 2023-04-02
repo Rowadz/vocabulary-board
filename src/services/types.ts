@@ -11,12 +11,12 @@ export interface DefinitionAPIResponse {
   meanings: Meaning[]
 }
 
-interface Meaning {
+export interface Meaning {
   partOfSpeech: string
   definitions: Definition[]
 }
 
-interface Definition {
+export interface Definition {
   definition: string
   example: string
   synonyms: any[]

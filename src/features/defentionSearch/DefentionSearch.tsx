@@ -3,9 +3,8 @@ import { useLazyGetDefinitionQuery } from '../../services/defentionSearchService
 
 export const DefentionSearch = () => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const [triggerSearchCall, { data, isLoading, error }] =
-    useLazyGetDefinitionQuery()
-  console.log({ isLoading, data, error })
+  const [triggerSearchCall] = useLazyGetDefinitionQuery()
+
   return (
     <>
       <input
