@@ -1,5 +1,6 @@
 import {
   ActionReducerMapBuilder,
+  createAsyncThunk,
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit'
@@ -9,17 +10,28 @@ import {
   DefinitionAPIResponse,
   DefinitionAPIResponseTranformed,
 } from '../../services/types'
-import { getParsedDefinitions } from './wordCardsAPI'
+import * as wordsApi from './wordCardsAPI'
 
 export type WordsState = DefinitionAPIResponse[]
 
-const initialState: WordsState = getParsedDefinitions()
+export const deleteWord = createAsyncThunk(
+  'words/deleteWord',
+  async (definitionAPIResponse: DefinitionAPIResponse) => {
+    wordsApi.deleteDefinition(definitionAPIResponse)
+  }
+)
+
+const initialState: WordsState = []
 
 export const wordsSlice = createSlice({
-  name: 'search',
+  name: 'words',
   initialState,
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<WordsState>) => {
+    builder.addCase(deleteWord.fulfilled, (state: WordsState, a) => {
+      const wordToDelete = a.meta.arg.word
+      return state.filter((d: DefinitionAPIResponse) => d.word !== wordToDelete)
+    })
     builder.addMatcher(
       defentionSearchApi.endpoints.getDefinition.matchFulfilled,
       (

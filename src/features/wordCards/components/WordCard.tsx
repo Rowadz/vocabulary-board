@@ -1,5 +1,7 @@
+import { useAppDispatch } from '../../../app/hooks'
 import { DefinitionAPIResponse } from '../../../services/types'
-import { saveDefinition } from '../wordCardsAPI'
+import { deleteDefinition, saveDefinition } from '../wordCardsAPI'
+import { deleteWord } from '../wordCardsSlice'
 import { Meanings } from './Meanings'
 
 export const WordCard = ({
@@ -7,6 +9,7 @@ export const WordCard = ({
 }: {
   definition: DefinitionAPIResponse
 }) => {
+  const dispatch = useAppDispatch()
   return (
     <div className="card w-96 bg-base-100 shadow-xl my-1">
       <div className="card-body">
@@ -21,6 +24,16 @@ export const WordCard = ({
             className="btn btn-primary"
           >
             Save!
+          </button>
+          <button
+            onClick={() => {
+              deleteDefinition(definition).then(() => {
+                dispatch(deleteWord(definition))
+              })
+            }}
+            className="btn btn-error"
+          >
+            Delete
           </button>
         </div>
       </div>

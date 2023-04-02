@@ -11,6 +11,19 @@ export const saveDefinition = async (
   )
 }
 
+export const deleteDefinition = async ({
+  word: wordToDelete,
+}: DefinitionAPIResponse) => {
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(
+      getParsedDefinitions().filter(
+        ({ word }: DefinitionAPIResponse) => word !== wordToDelete
+      )
+    )
+  )
+}
+
 export const getDefinition = (): string => {
   return localStorage.getItem(KEY) || '[]'
 }
