@@ -9,10 +9,11 @@ import {
   DefinitionAPIResponse,
   DefinitionAPIResponseTranformed,
 } from '../../services/types'
+import { getParsedDefinitions } from './wordCardsAPI'
 
 export type WordsState = DefinitionAPIResponse[]
 
-const initialState: WordsState = []
+const initialState: WordsState = getParsedDefinitions()
 
 export const wordsSlice = createSlice({
   name: 'search',
