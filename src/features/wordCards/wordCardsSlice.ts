@@ -21,7 +21,7 @@ export const deleteWord = createAsyncThunk(
   }
 )
 
-const initialState: WordsState = []
+const initialState: WordsState = wordsApi.getParsedDefinitions()
 
 export const wordsSlice = createSlice({
   name: 'words',
