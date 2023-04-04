@@ -23,7 +23,7 @@ export interface Definition {
   antonyms: any[]
 }
 
-interface Phonetic {
+export interface Phonetic {
   text: string
   audio?: string
 }
