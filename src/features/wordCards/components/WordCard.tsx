@@ -11,31 +11,33 @@ export const WordCard = ({
 }) => {
   const dispatch = useAppDispatch()
   return (
-    <div className="card w-96 bg-base-100 shadow-xl my-1">
+    <div className="card overflow-auto h-96 w-96 bg-base-100 shadow-xl my-1">
       <div className="card-body">
-        <h2 className="card-title">{definition.word}</h2>
+        <div className="flex sticky border-b-2 border-indigo-500 top-0 bg-base-100 z-50">
+          <h2 className="card-title flex-1">{definition.word}</h2>
+          <div className="card-actions justify-end my-5">
+            <button
+              onClick={() => {
+                saveDefinition(definition)
+              }}
+              className="btn btn-primary btn-sm"
+            >
+              Save!
+            </button>
+            <button
+              onClick={() => {
+                deleteDefinition(definition).then(() => {
+                  dispatch(deleteWord(definition))
+                })
+              }}
+              className="btn btn-error btn-sm"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
         <p>{definition.origin}</p>
         <Meanings meanings={definition.meanings} />
-        <div className="card-actions justify-end">
-          <button
-            onClick={() => {
-              saveDefinition(definition)
-            }}
-            className="btn btn-primary"
-          >
-            Save!
-          </button>
-          <button
-            onClick={() => {
-              deleteDefinition(definition).then(() => {
-                dispatch(deleteWord(definition))
-              })
-            }}
-            className="btn btn-error"
-          >
-            Delete
-          </button>
-        </div>
       </div>
     </div>
   )
