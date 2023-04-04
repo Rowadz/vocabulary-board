@@ -7,7 +7,10 @@ env:
   github_token: ${{ secrets.DEPLOY_TO_GITHUB_SECRET_TOKEN }}
   repository: ${{ github.repository }}
 
-on: issue_comment
+on:
+  pull_requests:
+    branches:
+      - 'main'
 
 jobs:
   build:
