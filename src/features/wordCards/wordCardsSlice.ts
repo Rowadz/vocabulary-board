@@ -53,7 +53,7 @@ export const wordsSlice = createSlice({
         state: WordsState,
         { payload }: PayloadAction<DefinitionAPIResponseTranformed>
       ) => {
-        state.definitions.push(...payload.response)
+        state.definitions.unshift(...payload.response)
       }
     )
   },

@@ -9,7 +9,7 @@ export const saveDefinition = async (
 ) => {
   localStorage.setItem(
     KEY_WORDS,
-    JSON.stringify([...getParsedDefinitions(), definitionAPIResponse])
+    JSON.stringify([definitionAPIResponse, ...getParsedDefinitions()])
   )
 }
 
