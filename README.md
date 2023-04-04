@@ -5,7 +5,8 @@
 
 A small app to bookmark some words I'm trying to remember.
 
-<img src="thumb.png" width="100%" height="100%" />
+<img src="thumb1.png" width="100%" height="100%" />
+<img src="thumb2.png" width="100%" height="100%" />
 
 # For the future
 
