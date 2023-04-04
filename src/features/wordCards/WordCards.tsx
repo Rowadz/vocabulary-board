@@ -1,9 +1,10 @@
+import { memo } from 'react'
 import { useSelector } from 'react-redux'
 import { DefinitionAPIResponse } from '../../services/types'
 import { WordCard } from './components/WordCard'
 import { selectWords, WordsState } from './wordCardsSlice'
 
-export const WordCards = () => {
+export const WordCards = memo(() => {
   const words: WordsState = useSelector(selectWords)
   console.log({ words })
 
@@ -14,4 +15,4 @@ export const WordCards = () => {
       })}
     </div>
   )
-}
+})
