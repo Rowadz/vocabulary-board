@@ -12,7 +12,12 @@ import {
 } from '../../services/types'
 import * as wordsApi from './wordCardsAPI'
 
-export type WordsState = DefinitionAPIResponse[]
+export type ViewMode = 'VARBOSE' | 'COMPACT'
+
+export type WordsState = {
+  definitions: DefinitionAPIResponse[]
+  viewMode: ViewMode
+}
 
 export const deleteWord = createAsyncThunk(
   'words/deleteWord',
@@ -21,16 +26,26 @@ export const deleteWord = createAsyncThunk(
   }
 )
 
-const initialState: WordsState = wordsApi.getParsedDefinitions()
+const initialState: WordsState = {
+  definitions: wordsApi.getParsedDefinitions(),
+  viewMode: wordsApi.getViewMode() || 'VARBOSE',
+}
 
 export const wordsSlice = createSlice({
   name: 'words',
   initialState,
-  reducers: {},
+  reducers: {
+    changeMode(state: WordsState, { payload: mode }: PayloadAction<ViewMode>) {
+      state.viewMode = mode
+      wordsApi.setViewMode(mode)
+    },
+  },
   extraReducers: (builder: ActionReducerMapBuilder<WordsState>) => {
     builder.addCase(deleteWord.fulfilled, (state: WordsState, a) => {
       const wordToDelete = a.meta.arg.word
-      return state.filter((d: DefinitionAPIResponse) => d.word !== wordToDelete)
+      state.definitions = state.definitions.filter(
+        (d: DefinitionAPIResponse) => d.word !== wordToDelete
+      )
     })
     builder.addMatcher(
       defentionSearchApi.endpoints.getDefinition.matchFulfilled,
@@ -38,12 +53,16 @@ export const wordsSlice = createSlice({
         state: WordsState,
         { payload }: PayloadAction<DefinitionAPIResponseTranformed>
       ) => {
-        state.push(...payload.response)
+        state.definitions.push(...payload.response)
       }
     )
   },
 })
 
-export const selectWords = (state: RootState) => state.words
+export const selectWordsDefinitions = (state: RootState) =>
+  state.words.definitions
+export const selectWordsViewMode = (state: RootState) => state.words.viewMode
+
+export const { changeMode } = wordsSlice.actions
 
 export default wordsSlice.reducer

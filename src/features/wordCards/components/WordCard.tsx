@@ -1,13 +1,25 @@
 import { memo } from 'react'
+import cx from 'classnames'
 import { DefinitionAPIResponse } from '../../../services/types'
+import { ViewMode } from '../wordCardsSlice'
 import { ActionButtons } from './ActionButtons'
 import { Meanings } from './Meanings'
 import { SoundPlayer } from './SoundPlayer'
 
 export const WordCard = memo(
-  ({ definition }: { definition: DefinitionAPIResponse }) => {
+  ({
+    definition,
+    mode,
+  }: {
+    mode: ViewMode
+    definition: DefinitionAPIResponse
+  }) => {
     return (
-      <div className="card overflow-auto h-96 w-96 bg-base-100 shadow-xl my-1">
+      <div
+        className={cx('card overflow-auto w-96 bg-base-100 shadow-xl my-1', {
+          'h-96': mode === 'VARBOSE',
+        })}
+      >
         <div className="card-body">
           <div className="flex sticky border-b-2 border-indigo-500 top-0 bg-base-100 z-50">
             <h2 className="card-title flex-1">
@@ -18,8 +30,8 @@ export const WordCard = memo(
               <ActionButtons definition={definition} />
             </div>
           </div>
-          <p>{definition.origin}</p>
-          <Meanings meanings={definition.meanings} />
+
+          {mode === 'VARBOSE' && <Meanings meanings={definition.meanings} />}
         </div>
       </div>
     )

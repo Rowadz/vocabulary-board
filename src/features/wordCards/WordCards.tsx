@@ -1,17 +1,25 @@
 import { memo } from 'react'
 import { useSelector, shallowEqual } from 'react-redux'
 import { DefinitionAPIResponse } from '../../services/types'
+import { ViewChanger } from './components/ViewChanger'
 import { WordCard } from './components/WordCard'
-import { selectWords, WordsState } from './wordCardsSlice'
+import { selectWordsDefinitions, selectWordsViewMode } from './wordCardsSlice'
 
 export const WordCards = memo(() => {
-  const words: WordsState = useSelector(selectWords, shallowEqual)
+  const words: DefinitionAPIResponse[] = useSelector(
+    selectWordsDefinitions,
+    shallowEqual
+  )
+  const mode = useSelector(selectWordsViewMode)
 
   return (
-    <div className="flex justify-evenly	flex-wrap ">
-      {words.map((definition: DefinitionAPIResponse, i: number) => {
-        return <WordCard definition={definition} key={i} />
-      })}
-    </div>
+    <>
+      <ViewChanger />
+      <div className="flex justify-evenly	flex-wrap ">
+        {words.map((definition: DefinitionAPIResponse, i: number) => {
+          return <WordCard mode={mode} definition={definition} key={i} />
+        })}
+      </div>
+    </>
   )
 })
