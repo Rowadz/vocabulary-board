@@ -8,9 +8,8 @@ env:
   repository: ${{ github.repository }}
 
 on:
-  pull_requests:
-    branches:
-      - 'main'
+  pull_request_target:
+    branches: ['main']
 
 jobs:
   build:
@@ -18,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [14.x, 16.x, 18.x]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
