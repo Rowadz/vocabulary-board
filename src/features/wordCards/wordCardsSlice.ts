@@ -28,7 +28,7 @@ export const deleteWord = createAsyncThunk(
 
 const initialState: WordsState = {
   definitions: wordsApi.getParsedDefinitions(),
-  viewMode: wordsApi.getViewMode() || 'VARBOSE',
+  viewMode: wordsApi.getViewMode() || 'COMPACT',
 }
 
 export const wordsSlice = createSlice({
