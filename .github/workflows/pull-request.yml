@@ -8,7 +8,7 @@ env:
   repository: ${{ github.repository }}
 
 on:
-  pull_requests:
+  pull_request:
     branches: ['main']
 
 jobs:
