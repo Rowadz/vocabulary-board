@@ -17,7 +17,7 @@ export const WordCard = memo(
     return (
       <div
         className={cx(
-          'border-2 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 transition ease-in-out delay-150 card overflow-auto w-96 bg-base-100 shadow-xl my-1',
+          'border-2 card overflow-auto w-96 bg-base-100 shadow-xl my-1',
           {
             'h-96': mode === 'VARBOSE',
           }
