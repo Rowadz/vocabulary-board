@@ -8,6 +8,15 @@ A small app to bookmark some words I'm trying to remember.
 <img src="thumb1.png" width="100%" height="100%" />
 <img src="thumb2.png" width="100%" height="100%" />
 
+# How to run locally
+
+```bash
+$ git@github.com:Rowadz/vocabulary-board.git
+$ cd vocabulary-board
+$ npm i
+$ npm run start
+```
+
 # For the future
 
 - Better style.
