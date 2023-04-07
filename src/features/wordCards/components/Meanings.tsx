@@ -1,3 +1,4 @@
+import cx from 'classnames'
 import { Definition, Meaning } from '../../../services/types'
 
 export const Meanings = ({ meanings }: { meanings: Meaning[] }) => {
@@ -6,18 +7,22 @@ export const Meanings = ({ meanings }: { meanings: Meaning[] }) => {
       {meanings.map((m: Meaning, i: number) => {
         return (
           <div key={i}>
-            <ul className="steps steps-vertical">
-              {m.definitions.map((d: Definition, j: number) => {
-                return (
-                  <li
-                    key={`${j}-${d.definition}`}
-                    className="step step-primary"
-                  >
+            {m.definitions.map((d: Definition, j: number) => {
+              return (
+                <div
+                  className={cx('chat', {
+                    'chat-end': j % 2 === 0,
+                    'chat-start': j % 2 !== 0,
+                  })}
+                  key={`${j}-${d.definition}`}
+                >
+                  <div className="chat-bubble chat-bubble-info">
                     {d.definition}
-                  </li>
-                )
-              })}
-            </ul>
+                  </div>
+                </div>
+              )
+            })}
+
             <div className="divider" />
           </div>
         )
