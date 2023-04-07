@@ -9,7 +9,7 @@ export const Editor = () => {
 
   return (
     <div>
-      <WordCard inEditor={true} mode={mode} definition={definition!} />
+      <WordCard mode={mode} definition={definition!} />
     </div>
   )
 }
