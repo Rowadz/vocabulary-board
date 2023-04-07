@@ -25,6 +25,12 @@ export const deleteWord = createAsyncThunk(
     wordsApi.deleteDefinition(definitionAPIResponse)
   }
 )
+export const saveDefinition = createAsyncThunk(
+  'words/saveDefinition',
+  async (definitionAPIResponse: DefinitionAPIResponse) => {
+    return wordsApi.saveDefinition(definitionAPIResponse)
+  }
+)
 
 const initialState: WordsState = {
   definitions: wordsApi.getParsedDefinitions(),
@@ -46,6 +52,16 @@ export const wordsSlice = createSlice({
       state.definitions = state.definitions.filter(
         (d: DefinitionAPIResponse) => d.word !== wordToDelete
       )
+    })
+    builder.addCase(saveDefinition.fulfilled, (state: WordsState, a) => {
+      const newDef = a.payload
+
+      state.definitions = state.definitions.map((d: DefinitionAPIResponse) => {
+        if (d.word === newDef.word) {
+          return newDef
+        }
+        return d
+      })
     })
     builder.addMatcher(
       defentionSearchApi.endpoints.getDefinition.matchFulfilled,

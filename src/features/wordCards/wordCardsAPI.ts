@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import { DefinitionAPIResponse } from '../../services/types'
 import { ViewMode } from './wordCardsSlice'
 
@@ -6,11 +7,24 @@ const KEY_VIEW_MODE = 'vocabulary-board-view-mode'
 
 export const saveDefinition = async (
   definitionAPIResponse: DefinitionAPIResponse
-) => {
-  localStorage.setItem(
-    KEY_WORDS,
-    JSON.stringify([definitionAPIResponse, ...getParsedDefinitions()])
+): Promise<Required<DefinitionAPIResponse>> => {
+  const data: Required<DefinitionAPIResponse> = {
+    ...definitionAPIResponse,
+    savedUnixTimestamp: definitionAPIResponse.savedUnixTimestamp || Date.now(),
+    id: definitionAPIResponse.id || uuidv4(),
+  }
+
+  const oldData = getParsedDefinitions()
+  const isAlreadySaved = oldData.find(
+    (def) => def.id === definitionAPIResponse.id
   )
+
+  if (isAlreadySaved) {
+    return data
+  }
+
+  localStorage.setItem(KEY_WORDS, JSON.stringify([data, ...oldData]))
+  return data
 }
 
 export const deleteDefinition = async ({
@@ -38,7 +52,9 @@ export const setViewMode = async (viewMode: ViewMode): Promise<void> => {
   localStorage.setItem(KEY_VIEW_MODE, viewMode)
 }
 
-export const getParsedDefinitions = (): DefinitionAPIResponse[] => {
-  const savedData: DefinitionAPIResponse[] = JSON.parse(getDefinition())
+export const getParsedDefinitions = (): Required<DefinitionAPIResponse>[] => {
+  const savedData: Required<DefinitionAPIResponse>[] = JSON.parse(
+    getDefinition()
+  )
   return savedData
 }

@@ -3,7 +3,13 @@ export interface DefinitionAPIResponseTranformed {
   word: string
 }
 
-export interface DefinitionAPIResponse {
+// these are added to the definition after saving it
+export interface DefinitionMetaData {
+  id: string
+  savedUnixTimestamp: number
+}
+
+export interface DefinitionAPIResponse extends Partial<DefinitionMetaData> {
   word: string
   phonetic: string
   phonetics: Phonetic[]
