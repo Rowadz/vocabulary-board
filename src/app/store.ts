@@ -4,11 +4,13 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 import { defentionSearchApi } from '../services/defentionSearchService'
 import searchReducer from '../features/defentionSearch/defentionSearchSlice'
 import wordsReducer from '../features/wordCards/wordCardsSlice'
+import editorReducer from '../features/editor/editorSlice'
 
 export const store = configureStore({
   reducer: {
     search: searchReducer,
     words: wordsReducer,
+    editor: editorReducer,
     [defentionSearchApi.reducerPath]: defentionSearchApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

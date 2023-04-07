@@ -5,25 +5,25 @@ import { ViewMode } from '../wordCardsSlice'
 import { ActionButtons } from './ActionButtons'
 import { Meanings } from './Meanings'
 import { SoundPlayer } from './SoundPlayer'
-import { TagButton } from './TagButton'
+import { TagButton } from './TagsButton'
 import { TagsRenderer } from './TagsRenderer'
 
+type WordCardProps = {
+  mode: ViewMode
+  inEditor?: boolean
+  definition: DefinitionAPIResponse
+}
+
 export const WordCard = memo(
-  ({
-    definition,
-    mode,
-  }: {
-    mode: ViewMode
-    definition: DefinitionAPIResponse
-  }) => {
+  ({ definition, mode, inEditor }: WordCardProps) => {
     return (
       <div
         className={cx(
-          'border-2 card overflow-auto bg-base-100 shadow-xl my-1',
+          'border-2 card w-96 overflow-auto bg-base-100 shadow-xl my-1',
           {
             'h-96': mode === 'VARBOSE',
-            'w-full': definition.word === 'meow',
-            'w-96': definition.word !== 'meow',
+            'w-96': !inEditor,
+            'w-full': inEditor,
           }
         )}
       >
@@ -32,7 +32,7 @@ export const WordCard = memo(
             <h2 className="card-title flex-1">
               <SoundPlayer phonetics={definition.phonetics} />
               {definition.word}
-              <TagButton />
+              <TagButton definition={definition} />
             </h2>
             <div className="card-actions justify-end my-5">
               <ActionButtons definition={definition} />
