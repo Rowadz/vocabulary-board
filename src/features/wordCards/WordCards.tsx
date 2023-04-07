@@ -11,14 +11,21 @@ export const WordCards = memo(() => {
     shallowEqual
   )
   const mode = useSelector(selectWordsViewMode)
+  if (!words.length) {
+    return null
+  }
 
   return (
     <>
-      <ViewChanger />
-      <div className="flex justify-evenly	flex-wrap ">
-        {words.map((definition: DefinitionAPIResponse, i: number) => {
-          return <WordCard mode={mode} definition={definition} key={i} />
-        })}
+      <div className="flex flex-col w-full border-opacity-50">
+        <div className="divider">View Controls</div>
+        <ViewChanger />
+        <div className="divider">Words</div>
+        <div className="flex justify-evenly	flex-wrap ">
+          {words.map((definition: DefinitionAPIResponse, i: number) => {
+            return <WordCard mode={mode} definition={definition} key={i} />
+          })}
+        </div>
       </div>
     </>
   )
