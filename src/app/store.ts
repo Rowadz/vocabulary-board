@@ -5,10 +5,12 @@ import { defentionSearchApi } from '../services/defentionSearchService'
 import searchReducer from '../features/defentionSearch/defentionSearchSlice'
 import wordsReducer from '../features/wordCards/wordCardsSlice'
 import editorReducer from '../features/editor/editorSlice'
+import tagsReducer from '../features/tags/tagsSlice'
 
 export const store = configureStore({
   reducer: {
     search: searchReducer,
+    tags: tagsReducer,
     words: wordsReducer,
     editor: editorReducer,
     [defentionSearchApi.reducerPath]: defentionSearchApi.reducer,

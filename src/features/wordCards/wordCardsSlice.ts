@@ -1,6 +1,7 @@
 import {
   ActionReducerMapBuilder,
   createAsyncThunk,
+  createSelector,
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit'
@@ -45,6 +46,19 @@ export const wordsSlice = createSlice({
       state.viewMode = mode
       wordsApi.setViewMode(mode)
     },
+    addTagToDefinition(
+      state: WordsState,
+      {
+        payload: { definitionId, tagId },
+      }: PayloadAction<{ tagId: string; definitionId: string }>
+    ) {
+      state.definitions = state.definitions.map((d) => {
+        if (d.id === definitionId) {
+          return { ...d, tagIds: { ...d.tagIds, [tagId]: true } }
+        }
+        return d
+      })
+    },
   },
   extraReducers: (builder: ActionReducerMapBuilder<WordsState>) => {
     builder.addCase(deleteWord.fulfilled, (state: WordsState, a) => {
@@ -77,8 +91,20 @@ export const wordsSlice = createSlice({
 
 export const selectWordsDefinitions = (state: RootState) =>
   state.words.definitions
+
+const selectDefinitions = (state: RootState) => state.words.definitions
+const selectDefinitionId = (state: RootState, definitionId: string) =>
+  definitionId
+
+// TODO:: use entity adapter
+export const selectDefinitionById = createSelector(
+  [selectDefinitions, selectDefinitionId],
+  (definitions: DefinitionAPIResponse[], definitionId: string) =>
+    definitions.find((d) => d.id === definitionId)
+)
+
 export const selectWordsViewMode = (state: RootState) => state.words.viewMode
 
-export const { changeMode } = wordsSlice.actions
+export const { changeMode, addTagToDefinition } = wordsSlice.actions
 
 export default wordsSlice.reducer

@@ -7,6 +7,7 @@ export interface DefinitionAPIResponseTranformed {
 export interface DefinitionMetaData {
   id: string
   savedUnixTimestamp: number
+  tagIds: Record<string, boolean>
 }
 
 export interface DefinitionAPIResponse extends Partial<DefinitionMetaData> {

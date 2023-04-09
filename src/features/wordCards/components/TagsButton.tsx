@@ -5,20 +5,23 @@ import { DefinitionAPIResponse } from '../../../services/types'
 import { selectIsEditorOpen, toggleEditor } from '../../editor/editorSlice'
 
 export const TagButton = memo(
-  ({ definition }: { definition: DefinitionAPIResponse }) => {
+  ({ definition }: { definition: Required<DefinitionAPIResponse> }) => {
     const dispatch = useAppDispatch()
     const isEditorOpen = useSelector(selectIsEditorOpen)
+    if (isEditorOpen) {
+      return null
+    }
     return (
       <>
         <div className="indicator">
           <span className="indicator-item badge badge-secondary">1</span>
           <button
             onClick={() => {
-              dispatch(toggleEditor(isEditorOpen ? null : definition))
+              dispatch(toggleEditor(definition))
             }}
             className="btn btn-xs"
           >
-            {isEditorOpen ? 'Close tags editor' : 'Tags'}
+            Tags
           </button>
         </div>
       </>

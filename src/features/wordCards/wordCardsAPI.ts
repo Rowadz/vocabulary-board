@@ -12,6 +12,7 @@ export const saveDefinition = async (
     ...definitionAPIResponse,
     savedUnixTimestamp: definitionAPIResponse.savedUnixTimestamp || Date.now(),
     id: definitionAPIResponse.id || uuidv4(),
+    tagIds: {},
   }
 
   const oldData = getParsedDefinitions()
