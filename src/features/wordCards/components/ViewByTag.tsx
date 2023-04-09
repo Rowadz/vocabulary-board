@@ -8,14 +8,17 @@ import { WordCard } from './WordCard'
 
 const intersectingKeys = (...objects: Record<string, boolean | Tag>[]) => {
   return !!objects
-    .map((object) => Object.keys(object))
+    .map((object) => Object.keys(object || {}))
     .sort((a, b) => a.length - b.length)
     .reduce((a, b) => a.filter((key) => b.includes(key))).length
 }
 
 export const ViewByTag = memo(() => {
   const [selectedTags, setSelectedTags] = useState<Record<string, true>>({})
-  const tags: Tag[] = useSelector(selectAllTags)
+  const tags: Tag[] = [
+    ...useSelector(selectAllTags),
+    { tagId: 'No Tags!', title: 'No Tags!' },
+  ]
   // We know that the type here would be Required<DefinitionAPIResponse>[]
   // because you can't even attach  tags unless the definition is saved
   // maybe all of the properties should be included in the definition
@@ -53,7 +56,17 @@ export const ViewByTag = memo(() => {
       </div>
       <div className="flex justify-evenly	flex-wrap ">
         {definitions
-          .filter((d) => intersectingKeys(d.tagIds, selectedTags))
+          .filter((d) => {
+            if (
+              selectedTags['No Tags!'] &&
+              Object.keys(d.tagIds || {}).length === 0
+            ) {
+              // don't filter the definition if No Tags! is selected
+              // and there are no tags attached to it
+              return true
+            }
+            return intersectingKeys(d.tagIds, selectedTags)
+          })
           .map((d) => (
             <WordCard key={d.id} definition={d} mode="BY TAG" />
           ))}
