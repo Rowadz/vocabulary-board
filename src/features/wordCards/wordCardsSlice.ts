@@ -13,7 +13,7 @@ import {
 } from '../../services/types'
 import * as wordsApi from './wordCardsAPI'
 
-export type ViewMode = 'VARBOSE' | 'COMPACT'
+export type ViewMode = 'VARBOSE' | 'COMPACT' | 'BY TAG'
 
 export type WordsState = {
   definitions: DefinitionAPIResponse[]
