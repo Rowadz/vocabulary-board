@@ -10,8 +10,11 @@ export const saveDefinition = async (
 ): Promise<DefinitionAPIResponse> => {
   const data: DefinitionAPIResponse = {
     ...definitionAPIResponse,
-    savedUnixTimestamp: definitionAPIResponse.savedUnixTimestamp || Date.now(),
-    id: definitionAPIResponse.id || uuidv4(),
+    savedUnixTimestamp: Date.now(),
+    id:
+      definitionAPIResponse.id === 'NOT_SAVED'
+        ? uuidv4()
+        : definitionAPIResponse.id,
     tagIds: definitionAPIResponse.tagIds || {},
   }
 
