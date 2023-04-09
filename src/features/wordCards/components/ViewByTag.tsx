@@ -44,13 +44,13 @@ export const ViewByTag = memo(() => {
               }
             }}
           >
-            <a
+            <span
               className={cx('tab tab-bordered m-4', {
                 'tab-active': !!selectedTags[t.tagId],
               })}
             >
               {t.title}
-            </a>
+            </span>
           </div>
         ))}
       </div>
