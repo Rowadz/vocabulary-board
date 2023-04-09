@@ -69,14 +69,8 @@ export const wordsSlice = createSlice({
     ) {
       state.definitions = state.definitions.map((d) => {
         if (d.id === definitionId) {
-          // at this point `tagIds` should be in the object, but cuz we store the saved
-          // definitions and the non-saved ones in the same slice
-          // we have to do this or we attach `DefinitionMetaData`
-          // each time we create a new definition 🤔
-          if (d.tagIds) {
-            delete d.tagIds[tagId]
-            wordsApi.saveDefinition(d)
-          }
+          delete d.tagIds[tagId]
+          wordsApi.saveDefinition(d)
         }
         return d
       })
