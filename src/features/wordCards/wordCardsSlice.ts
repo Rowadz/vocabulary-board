@@ -54,7 +54,9 @@ export const wordsSlice = createSlice({
     ) {
       state.definitions = state.definitions.map((d) => {
         if (d.id === definitionId) {
-          return { ...d, tagIds: { ...d.tagIds, [tagId]: true } }
+          const newDef = { ...d, tagIds: { ...d.tagIds, [tagId]: true } }
+          wordsApi.saveDefinition(newDef)
+          return newDef
         }
         return d
       })
@@ -73,6 +75,7 @@ export const wordsSlice = createSlice({
           // each time we create a new definition 🤔
           if (d.tagIds) {
             delete d.tagIds[tagId]
+            wordsApi.saveDefinition(d)
           }
         }
         return d

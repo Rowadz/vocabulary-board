@@ -12,7 +12,7 @@ export const saveDefinition = async (
     ...definitionAPIResponse,
     savedUnixTimestamp: definitionAPIResponse.savedUnixTimestamp || Date.now(),
     id: definitionAPIResponse.id || uuidv4(),
-    tagIds: {},
+    tagIds: definitionAPIResponse.tagIds || {},
   }
 
   const oldData = getParsedDefinitions()
@@ -21,6 +21,13 @@ export const saveDefinition = async (
   )
 
   if (isAlreadySaved) {
+    // override
+    localStorage.setItem(
+      KEY_WORDS,
+      JSON.stringify(
+        oldData.map((d) => (d.id === definitionAPIResponse.id ? data : d))
+      )
+    )
     return data
   }
 
