@@ -14,7 +14,9 @@ export const TagButton = memo(
     return (
       <>
         <div className="indicator">
-          <span className="indicator-item badge badge-secondary">1</span>
+          <span className="indicator-item badge badge-secondary">
+            {Object.keys(definition.tagIds).length}
+          </span>
           <button
             onClick={() => {
               dispatch(toggleEditor(definition))
