@@ -59,6 +59,25 @@ export const wordsSlice = createSlice({
         return d
       })
     },
+    ramoveTagToDefinition(
+      state: WordsState,
+      {
+        payload: { definitionId, tagId },
+      }: PayloadAction<{ tagId: string; definitionId: string }>
+    ) {
+      state.definitions = state.definitions.map((d) => {
+        if (d.id === definitionId) {
+          // at this point `tagIds` should be in the object, but cuz we store the saved
+          // definitions and the non-saved ones in the same slice
+          // we have to do this or we attach `DefinitionMetaData`
+          // each time we create a new definition 🤔
+          if (d.tagIds) {
+            delete d.tagIds[tagId]
+          }
+        }
+        return d
+      })
+    },
   },
   extraReducers: (builder: ActionReducerMapBuilder<WordsState>) => {
     builder.addCase(deleteWord.fulfilled, (state: WordsState, a) => {
@@ -105,6 +124,7 @@ export const selectDefinitionById = createSelector(
 
 export const selectWordsViewMode = (state: RootState) => state.words.viewMode
 
-export const { changeMode, addTagToDefinition } = wordsSlice.actions
+export const { changeMode, addTagToDefinition, ramoveTagToDefinition } =
+  wordsSlice.actions
 
 export default wordsSlice.reducer
