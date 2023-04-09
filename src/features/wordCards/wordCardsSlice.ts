@@ -1,6 +1,7 @@
 import {
   ActionReducerMapBuilder,
   createAsyncThunk,
+  createSelector,
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit'
@@ -12,7 +13,7 @@ import {
 } from '../../services/types'
 import * as wordsApi from './wordCardsAPI'
 
-export type ViewMode = 'VARBOSE' | 'COMPACT'
+export type ViewMode = 'VARBOSE' | 'COMPACT' | 'BY TAG'
 
 export type WordsState = {
   definitions: DefinitionAPIResponse[]
@@ -44,6 +45,41 @@ export const wordsSlice = createSlice({
     changeMode(state: WordsState, { payload: mode }: PayloadAction<ViewMode>) {
       state.viewMode = mode
       wordsApi.setViewMode(mode)
+    },
+    addTagToDefinition(
+      state: WordsState,
+      {
+        payload: { definitionId, tagId },
+      }: PayloadAction<{ tagId: string; definitionId: string }>
+    ) {
+      state.definitions = state.definitions.map((d) => {
+        if (d.id === definitionId) {
+          const newDef = { ...d, tagIds: { ...d.tagIds, [tagId]: true } }
+          wordsApi.saveDefinition(newDef)
+          return newDef
+        }
+        return d
+      })
+    },
+    ramoveTagToDefinition(
+      state: WordsState,
+      {
+        payload: { definitionId, tagId },
+      }: PayloadAction<{ tagId: string; definitionId: string }>
+    ) {
+      state.definitions = state.definitions.map((d) => {
+        if (d.id === definitionId) {
+          // at this point `tagIds` should be in the object, but cuz we store the saved
+          // definitions and the non-saved ones in the same slice
+          // we have to do this or we attach `DefinitionMetaData`
+          // each time we create a new definition 🤔
+          if (d.tagIds) {
+            delete d.tagIds[tagId]
+            wordsApi.saveDefinition(d)
+          }
+        }
+        return d
+      })
     },
   },
   extraReducers: (builder: ActionReducerMapBuilder<WordsState>) => {
@@ -77,8 +113,21 @@ export const wordsSlice = createSlice({
 
 export const selectWordsDefinitions = (state: RootState) =>
   state.words.definitions
+
+const selectDefinitions = (state: RootState) => state.words.definitions
+const selectDefinitionId = (state: RootState, definitionId: string) =>
+  definitionId
+
+// TODO:: use entity adapter
+export const selectDefinitionById = createSelector(
+  [selectDefinitions, selectDefinitionId],
+  (definitions: DefinitionAPIResponse[], definitionId: string) =>
+    definitions.find((d) => d.id === definitionId)
+)
+
 export const selectWordsViewMode = (state: RootState) => state.words.viewMode
 
-export const { changeMode } = wordsSlice.actions
+export const { changeMode, addTagToDefinition, ramoveTagToDefinition } =
+  wordsSlice.actions
 
 export default wordsSlice.reducer
