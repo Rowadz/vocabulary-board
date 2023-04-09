@@ -49,11 +49,7 @@ export const WordCard = memo(
               <h2 className="card-title flex-1">
                 <SoundPlayer phonetics={definition.phonetics} />
                 {definition.word}
-                {!!definition.id && (
-                  <TagButton
-                    definition={definition as Required<DefinitionAPIResponse>}
-                  />
-                )}
+                {!!definition.id && <TagButton definition={definition} />}
               </h2>
               <div className="card-actions justify-end my-5">
                 {<ActionButtons definition={definition} />}

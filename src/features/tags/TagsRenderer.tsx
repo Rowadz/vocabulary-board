@@ -19,9 +19,9 @@ export const TagsRenderer = ({ mode = 'Editor' }: TagsRendererProps) => {
   const dispatch = useAppDispatch()
   const allTags: Tag[] = useSelector(selectAllTags)
   const editorDefinition = useSelector(selectEditorDefinition)
-  const definition: Required<DefinitionAPIResponse> = useSelector(
-    (state: RootState) => selectDefinitionById(state, editorDefinition.id)
-  ) as Required<DefinitionAPIResponse>
+  const definition: DefinitionAPIResponse = useSelector((state: RootState) =>
+    selectDefinitionById(state, editorDefinition.id)
+  ) as DefinitionAPIResponse
 
   return (
     <section>

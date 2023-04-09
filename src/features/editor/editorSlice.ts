@@ -3,7 +3,7 @@ import { RootState } from '../../app/store'
 import { DefinitionAPIResponse } from '../../services/types'
 
 export type EditorState = {
-  definition: Required<DefinitionAPIResponse> | null
+  definition: DefinitionAPIResponse | null
   isOpen: boolean
 }
 
@@ -18,7 +18,7 @@ export const editorSlice = createSlice({
   reducers: {
     toggleEditor(
       state: EditorState,
-      { payload }: PayloadAction<Required<DefinitionAPIResponse> | null>
+      { payload }: PayloadAction<DefinitionAPIResponse | null>
     ) {
       state.isOpen = !state.isOpen
       state.definition = payload

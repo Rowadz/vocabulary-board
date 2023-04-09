@@ -19,13 +19,10 @@ export const ViewByTag = memo(() => {
     ...useSelector(selectAllTags),
     { tagId: 'No Tags!', title: 'No Tags!' },
   ]
-  // We know that the type here would be Required<DefinitionAPIResponse>[]
-  // because you can't even attach  tags unless the definition is saved
-  // maybe all of the properties should be included in the definition
-  // as soon as we fetch it
-  const definitions: Required<DefinitionAPIResponse>[] = useSelector(
+
+  const definitions: DefinitionAPIResponse[] = useSelector(
     selectWordsDefinitions
-  ) as Required<DefinitionAPIResponse>[]
+  )
   return (
     <>
       <div className="tabs tabs-boxed">

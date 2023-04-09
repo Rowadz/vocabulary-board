@@ -5,7 +5,7 @@ import { DefinitionAPIResponse } from '../../../services/types'
 import { selectIsEditorOpen, toggleEditor } from '../../editor/editorSlice'
 
 export const TagButton = memo(
-  ({ definition }: { definition: Required<DefinitionAPIResponse> }) => {
+  ({ definition }: { definition: DefinitionAPIResponse }) => {
     const dispatch = useAppDispatch()
     const isEditorOpen = useSelector(selectIsEditorOpen)
     if (isEditorOpen) {

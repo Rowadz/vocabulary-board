@@ -15,7 +15,15 @@ export const defentionSearchApi = createApi({
         res: DefinitionAPIResponse[],
         _,
         word: string
-      ) => ({ response: res, word }),
+      ) => ({
+        response: res.map((d) => ({
+          ...d,
+          tagIds: {},
+          id: 'NOT_SAVED',
+          savedUnixTimestamp: 0,
+        })),
+        word,
+      }),
     }),
   }),
 })
