@@ -38,14 +38,12 @@ export const ViewByTag = memo(() => {
                 setSelectedTags((state) => {
                   const newObj = { ...state }
                   delete newObj[t.tagId]
-                  console.log(newObj)
                   localStorage.setItem(KEY, JSON.stringify(newObj))
                   return newObj
                 })
               } else {
                 setSelectedTags((state) => {
                   const newObj = { ...state, [t.tagId]: true }
-                  console.log(newObj)
                   localStorage.setItem(KEY, JSON.stringify(newObj))
                   return newObj as typeof selectedTags
                 })
