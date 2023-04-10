@@ -6,6 +6,8 @@ import { selectAllTags, Tag } from '../../tags/tagsSlice'
 import { selectWordsDefinitions } from '../wordCardsSlice'
 import { WordCard } from './WordCard'
 
+const KEY = 'vocabulary-board-tags-to-view-by'
+
 const intersectingKeys = (...objects: Record<string, boolean | Tag>[]) => {
   return !!objects
     .map((object) => Object.keys(object || {}))
@@ -14,7 +16,9 @@ const intersectingKeys = (...objects: Record<string, boolean | Tag>[]) => {
 }
 
 export const ViewByTag = memo(() => {
-  const [selectedTags, setSelectedTags] = useState<Record<string, true>>({})
+  const [selectedTags, setSelectedTags] = useState<Record<string, true>>(
+    JSON.parse(localStorage.getItem(KEY) || '{}')
+  )
   const tags: Tag[] = [
     ...useSelector(selectAllTags),
     { tagId: 'No Tags!', title: 'No Tags!' },
@@ -34,10 +38,17 @@ export const ViewByTag = memo(() => {
                 setSelectedTags((state) => {
                   const newObj = { ...state }
                   delete newObj[t.tagId]
+                  console.log(newObj)
+                  localStorage.setItem(KEY, JSON.stringify(newObj))
                   return newObj
                 })
               } else {
-                setSelectedTags((state) => ({ ...state, [t.tagId]: true }))
+                setSelectedTags((state) => {
+                  const newObj = { ...state, [t.tagId]: true }
+                  console.log(newObj)
+                  localStorage.setItem(KEY, JSON.stringify(newObj))
+                  return newObj as typeof selectedTags
+                })
               }
             }}
           >

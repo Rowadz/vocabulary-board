@@ -61,7 +61,9 @@ export const WordCard = memo(
               </div>
             )}
 
-            {mode === 'VARBOSE' && <Meanings meanings={definition.meanings} />}
+            {(mode === 'VARBOSE' || mode === 'BY TAG') && (
+              <Meanings meanings={definition.meanings} />
+            )}
           </div>
         </div>
       </div>
