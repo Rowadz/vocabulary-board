@@ -45,7 +45,7 @@ export const WordCard = memo(
           )}
         >
           <div className="card-body">
-            <div className="flex sticky border-b-2 border-indigo-500 top-0 bg-base-100 z-50">
+            <div className="flex sticky border-b-2 border-indigo-500 top-0 bg-base-100 z-40">
               <h2 className="card-title flex-1">
                 <SoundPlayer phonetics={definition.phonetics} />
                 {definition.word}

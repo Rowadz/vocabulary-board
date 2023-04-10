@@ -60,7 +60,7 @@ export const ThemeSelector = memo(() => {
         </div>
         <div
           onClick={onClick}
-          className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16"
+          className="z-50 dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16"
         >
           <div className="grid grid-cols-1 gap-3 p-3" tabIndex={0}>
             <button
