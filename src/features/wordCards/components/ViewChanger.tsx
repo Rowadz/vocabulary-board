@@ -16,7 +16,7 @@ export const ViewChanger = memo(() => {
         <div className="btn-group">
           <button
             onClick={() => {
-              mode === 'COMPACT' && toggleMode('VARBOSE')
+              toggleMode('VARBOSE')
             }}
             className={cx('btn btn-sm', { 'btn-active': mode === 'VARBOSE' })}
           >
@@ -24,11 +24,19 @@ export const ViewChanger = memo(() => {
           </button>
           <button
             onClick={() => {
-              mode === 'VARBOSE' && toggleMode('COMPACT')
+              toggleMode('COMPACT')
             }}
             className={cx('btn btn-sm', { 'btn-active': mode === 'COMPACT' })}
           >
             Compact
+          </button>
+          <button
+            onClick={() => {
+              toggleMode('BY TAG')
+            }}
+            className={cx('btn btn-sm', { 'btn-active': mode === 'BY TAG' })}
+          >
+            By tag
           </button>
         </div>
       </div>

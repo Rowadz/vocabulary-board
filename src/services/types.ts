@@ -5,11 +5,12 @@ export interface DefinitionAPIResponseTranformed {
 
 // these are added to the definition after saving it
 export interface DefinitionMetaData {
-  id: string
-  savedUnixTimestamp: number
+  id: string | 'NOT_SAVED'
+  savedUnixTimestamp: number | 0
+  tagIds: Record<string, boolean>
 }
 
-export interface DefinitionAPIResponse extends Partial<DefinitionMetaData> {
+export interface DefinitionAPIResponse extends DefinitionMetaData {
   word: string
   phonetic: string
   phonetics: Phonetic[]

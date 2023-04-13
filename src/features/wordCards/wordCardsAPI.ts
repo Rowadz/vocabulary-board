@@ -7,11 +7,15 @@ const KEY_VIEW_MODE = 'vocabulary-board-view-mode'
 
 export const saveDefinition = async (
   definitionAPIResponse: DefinitionAPIResponse
-): Promise<Required<DefinitionAPIResponse>> => {
-  const data: Required<DefinitionAPIResponse> = {
+): Promise<DefinitionAPIResponse> => {
+  const data: DefinitionAPIResponse = {
     ...definitionAPIResponse,
-    savedUnixTimestamp: definitionAPIResponse.savedUnixTimestamp || Date.now(),
-    id: definitionAPIResponse.id || uuidv4(),
+    savedUnixTimestamp: Date.now(),
+    id:
+      definitionAPIResponse.id === 'NOT_SAVED'
+        ? uuidv4()
+        : definitionAPIResponse.id,
+    tagIds: definitionAPIResponse.tagIds || {},
   }
 
   const oldData = getParsedDefinitions()
@@ -20,6 +24,13 @@ export const saveDefinition = async (
   )
 
   if (isAlreadySaved) {
+    // override
+    localStorage.setItem(
+      KEY_WORDS,
+      JSON.stringify(
+        oldData.map((d) => (d.id === definitionAPIResponse.id ? data : d))
+      )
+    )
     return data
   }
 
@@ -52,9 +63,7 @@ export const setViewMode = async (viewMode: ViewMode): Promise<void> => {
   localStorage.setItem(KEY_VIEW_MODE, viewMode)
 }
 
-export const getParsedDefinitions = (): Required<DefinitionAPIResponse>[] => {
-  const savedData: Required<DefinitionAPIResponse>[] = JSON.parse(
-    getDefinition()
-  )
+export const getParsedDefinitions = (): DefinitionAPIResponse[] => {
+  const savedData: DefinitionAPIResponse[] = JSON.parse(getDefinition())
   return savedData
 }
