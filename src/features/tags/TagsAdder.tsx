@@ -35,7 +35,7 @@ export const TagsAdder = memo(() => {
             ref={inputRef}
             onKeyDown={onKeyDown}
             type="text"
-            placeholder="Type a word here"
+            placeholder="Enter the tag name"
             className="input input-bordered  w-full max-w-xs outline-none mx-1"
           />
           <button
