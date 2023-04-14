@@ -1,12 +1,7 @@
-import { useEffect, memo } from 'react'
+import { memo } from 'react'
 const KEY = 'vocabulary-board-theme'
 
 export const ThemeSelector = memo(() => {
-  useEffect(() => {
-    const theme = localStorage.getItem(KEY) || 'night'
-    const html = document.getElementsByTagName('html').item(0)
-    html?.setAttribute('data-theme', theme)
-  }, [])
   const onClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const target = event.target as HTMLElement
     let theme = localStorage.getItem(KEY) || 'night'

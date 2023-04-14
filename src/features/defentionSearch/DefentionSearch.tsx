@@ -1,13 +1,21 @@
 import { useRef } from 'react'
+import cx from 'classnames'
 import { useLazyGetDefinitionQuery } from '../../services/defentionSearchService'
 
-export const DefentionSearch = () => {
+export const DefentionSearch = ({
+  fullWidth = true,
+  fun,
+}: {
+  fun?: React.Dispatch<React.SetStateAction<boolean>>
+  fullWidth?: boolean
+}) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [triggerSearchCall] = useLazyGetDefinitionQuery()
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const word: string | undefined = inputRef.current?.value
       if (word) {
+        !!fun && fun(false)
         triggerSearchCall(word)
       }
     }
@@ -15,7 +23,7 @@ export const DefentionSearch = () => {
 
   return (
     <>
-      <div className="form-control w-full ">
+      <div className={cx('form-control', { 'w-full': !!fullWidth })}>
         <div className="flex">
           <input
             ref={inputRef}
@@ -29,6 +37,7 @@ export const DefentionSearch = () => {
             onClick={() => {
               const word: string | undefined = inputRef.current?.value
               if (word) {
+                !!fun && fun(false)
                 triggerSearchCall(word)
               }
             }}
