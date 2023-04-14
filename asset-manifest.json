@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.485245a3.css",
-    "main.js": "/static/js/main.b97d9d30.js",
+    "main.js": "/static/js/main.c82e99b3.js",
     "static/js/787.bcbf08b5.chunk.js": "/static/js/787.bcbf08b5.chunk.js",
     "static/media/gradient-mesh.png": "/static/media/gradient-mesh.6343ed2ad8471b9288dd.png",
     "index.html": "/index.html",
     "static/media/vocabvault-logo.svg": "/static/media/vocabvault-logo.1b7fdb52360f9b171313d4f3f0abc1f5.svg",
     "main.485245a3.css.map": "/static/css/main.485245a3.css.map",
-    "main.b97d9d30.js.map": "/static/js/main.b97d9d30.js.map",
+    "main.c82e99b3.js.map": "/static/js/main.c82e99b3.js.map",
     "787.bcbf08b5.chunk.js.map": "/static/js/787.bcbf08b5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.485245a3.css",
-    "static/js/main.b97d9d30.js"
+    "static/js/main.c82e99b3.js"
   ]
 }
