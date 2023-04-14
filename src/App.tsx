@@ -18,7 +18,7 @@ function App() {
   const { length } = useSelector(selectWordsDefinitions) || []
   if (show && length === 0) {
     return (
-      <div className="flex justify-center h-screen items-center flex-col">
+      <div className="flex justify-center h-screen items-center flex-col m-10">
         <div className="bokotaro-container" />
 
         <img alt="logo" src={logo} className="mb-6 w-20" />
