@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { DefentionSearch, WordCards } from './features'
 import { Editor } from './features/editor/Editor'
+import logo from './vocabvault-logo.svg'
 import { selectIsEditorOpen } from './features/editor/editorSlice'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   if (show) {
     return (
       <div className="flex justify-center h-screen items-center flex-col p-5">
+        <img alt="logo" src={logo} className="mb-6 w-20" />
         <h1 className="text-2xl mb-12">
           Supercharge your vocabulary with VocabVault
         </h1>
