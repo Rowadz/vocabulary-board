@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { DefentionSearch, WordCards } from './features'
+import { DefentionSearch, selectWordsDefinitions, WordCards } from './features'
 import { Editor } from './features/editor/Editor'
 import logo from './vocabvault-logo.svg'
 import { selectIsEditorOpen } from './features/editor/editorSlice'
@@ -15,7 +15,8 @@ function App() {
   // }, [])
 
   const isEditorOpen = useSelector(selectIsEditorOpen)
-  if (show) {
+  const { length } = useSelector(selectWordsDefinitions) || []
+  if (show && length === 0) {
     return (
       <div className="flex justify-center h-screen items-center flex-col">
         <div className="bokotaro-container" />
