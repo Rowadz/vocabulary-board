@@ -17,7 +17,9 @@ function App() {
   const isEditorOpen = useSelector(selectIsEditorOpen)
   if (show) {
     return (
-      <div className="flex justify-center h-screen items-center flex-col p-5">
+      <div className="flex justify-center h-screen items-center flex-col">
+        <div className="bokotaro-container" />
+
         <img alt="logo" src={logo} className="mb-6 w-20" />
         <h1 className="text-2xl mb-12">
           Supercharge your vocabulary with VocabVault

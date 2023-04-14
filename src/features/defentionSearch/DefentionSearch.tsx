@@ -33,7 +33,7 @@ export const DefentionSearch = ({
             className="input input-bordered input-lg w-full max-w-xs outline-none mx-1"
           />
           <button
-            className="btn btn-active btn-lg"
+            className="btn btn-active btn-lg ml-3"
             onClick={() => {
               const word: string | undefined = inputRef.current?.value
               if (word) {
