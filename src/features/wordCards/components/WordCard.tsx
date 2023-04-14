@@ -38,7 +38,7 @@ export const WordCard = memo(
           className={cx(
             'border-2 card w-96 overflow-auto bg-base-100 shadow-xl my-1',
             {
-              'h-96': mode === 'VARBOSE',
+              'h-96': mode === 'VERBOSE',
               'w-96': !isEditorOpen,
               'w-full': isEditorOpen,
             }
@@ -61,7 +61,7 @@ export const WordCard = memo(
               </div>
             )}
 
-            {(mode === 'VARBOSE' || mode === 'BY TAG') && (
+            {(mode === 'VERBOSE' || mode === 'BY TAG') && (
               <Meanings meanings={definition.meanings} />
             )}
           </div>

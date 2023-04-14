@@ -16,11 +16,11 @@ export const ViewChanger = memo(() => {
         <div className="btn-group">
           <button
             onClick={() => {
-              toggleMode('VARBOSE')
+              toggleMode('VERBOSE')
             }}
-            className={cx('btn btn-sm', { 'btn-active': mode === 'VARBOSE' })}
+            className={cx('btn btn-sm', { 'btn-active': mode === 'VERBOSE' })}
           >
-            Varbose
+            Verbose
           </button>
           <button
             onClick={() => {

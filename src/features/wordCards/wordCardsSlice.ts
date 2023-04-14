@@ -13,7 +13,7 @@ import {
 } from '../../services/types'
 import * as wordsApi from './wordCardsAPI'
 
-export type ViewMode = 'VARBOSE' | 'COMPACT' | 'BY TAG'
+export type ViewMode = 'VERBOSE' | 'COMPACT' | 'BY TAG'
 
 export type WordsState = {
   definitions: DefinitionAPIResponse[]
@@ -35,7 +35,7 @@ export const saveDefinition = createAsyncThunk(
 
 const initialState: WordsState = {
   definitions: wordsApi.getParsedDefinitions(),
-  viewMode: wordsApi.getViewMode() || 'VARBOSE',
+  viewMode: wordsApi.getViewMode() || 'VERBOSE',
 }
 
 export const wordsSlice = createSlice({
