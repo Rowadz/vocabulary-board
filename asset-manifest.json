@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.485245a3.css",
-    "main.js": "/static/js/main.0ba9ef75.js",
-    "static/js/787.bcbf08b5.chunk.js": "/static/js/787.bcbf08b5.chunk.js",
-    "static/media/gradient-mesh.png": "/static/media/gradient-mesh.6343ed2ad8471b9288dd.png",
-    "index.html": "/index.html",
-    "static/media/vocabvault-logo.svg": "/static/media/vocabvault-logo.1b7fdb52360f9b171313d4f3f0abc1f5.svg",
-    "main.485245a3.css.map": "/static/css/main.485245a3.css.map",
-    "main.0ba9ef75.js.map": "/static/js/main.0ba9ef75.js.map",
-    "787.bcbf08b5.chunk.js.map": "/static/js/787.bcbf08b5.chunk.js.map"
+    "main.css": "/vocabulary-board/static/css/main.7151405d.css",
+    "main.js": "/vocabulary-board/static/js/main.54ec9eac.js",
+    "static/js/787.bcbf08b5.chunk.js": "/vocabulary-board/static/js/787.bcbf08b5.chunk.js",
+    "static/media/gradient-mesh.png": "/vocabulary-board/static/media/gradient-mesh.6343ed2ad8471b9288dd.png",
+    "index.html": "/vocabulary-board/index.html",
+    "static/media/vocabvault-logo.svg": "/vocabulary-board/static/media/vocabvault-logo.1b7fdb52360f9b171313d4f3f0abc1f5.svg",
+    "main.7151405d.css.map": "/vocabulary-board/static/css/main.7151405d.css.map",
+    "main.54ec9eac.js.map": "/vocabulary-board/static/js/main.54ec9eac.js.map",
+    "787.bcbf08b5.chunk.js.map": "/vocabulary-board/static/js/787.bcbf08b5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.485245a3.css",
-    "static/js/main.0ba9ef75.js"
+    "static/css/main.7151405d.css",
+    "static/js/main.54ec9eac.js"
   ]
 }
