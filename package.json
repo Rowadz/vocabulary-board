@@ -2,7 +2,7 @@
   "name": "vocabulary-board",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gh-pages--effervescent-sunshine-f88f28.netlify.app/",
+  "homepage": "https://rowadz.github.io/vocabulary-board/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
