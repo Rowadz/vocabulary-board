@@ -42,4 +42,4 @@ jobs:
           git remote set-url origin https://${github_token}@github.com/${repository}
           npm run build
       - name: Deploy Project 🚀
-         run: npm run deploy
+          run: npm run deploy
